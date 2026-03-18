@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Activity, History, Bell, Fish, LayoutDashboard } from 'lucide-react';
+import { Activity, History as HistoryIcon, Bell, Fish, LayoutDashboard } from 'lucide-react';
 import { AppProvider } from './context/AppContext';
 import Dashboard from './pages/Dashboard';
 import Scanner from './pages/Scanner';
 import Metric from './pages/Metric';
+import History from './pages/History';
 import './App.css';
 
 const Layout = ({ children }) => {
@@ -42,7 +43,7 @@ const Layout = ({ children }) => {
               <Activity size={20} /> <span>Pond Metrics</span>
             </Link>
             <Link to="/history" className={`nav-item ${location.pathname === '/history' ? 'active' : ''}`}>
-              <History size={20} /> <span>Treatment Logs</span>
+              <HistoryIcon size={20} /> <span>Treatment Logs</span>
             </Link>
           </nav>
 
@@ -70,7 +71,7 @@ export default function App() {
 
             <Route path="/" element={<Dashboard />} />
             <Route path="/metrics" element={<Metric />} />
-            <Route path="/history" element={<div className="p-4 text-center" style={{ padding: '2rem' }}>History Log Coming Soon</div>} />
+            <Route path="/history" element={<History />} />
           </Routes>
         </Layout>
       </Router>

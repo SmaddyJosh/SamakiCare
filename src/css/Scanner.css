@@ -1,0 +1,269 @@
+.scanner-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 1.5rem;
+}
+
+.scanner-header {
+    text-align: center;
+}
+
+.scanner-header h1 {
+    font-size: 1.5rem;
+    color: var(--text-main);
+}
+
+.scanner-header p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* State 1: Input Box */
+.input-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.upload-box {
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 1 / 1;
+    background-color: var(--surface);
+    border: 2px dashed var(--primary);
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--primary);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.upload-box:hover {
+    background-color: var(--primary-light);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 280px;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.divider span {
+    padding: 0 1rem;
+}
+
+.btn-primary {
+    width: 100%;
+    max-width: 280px;
+    background-color: var(--primary);
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.75rem;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+}
+
+/* State 2: Scanning */
+.scanning-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scan-window {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #0f172a;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 4px solid #1e293b;
+}
+
+.scan-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+}
+
+.laser {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #2dd4bf;
+    box-shadow: 0 0 15px #2dd4bf;
+    z-index: 10;
+    animation: scan-laser 2s linear infinite;
+}
+
+@keyframes scan-laser {
+    0% {
+        top: 0%;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+.scan-text {
+    margin-top: 1.5rem;
+    color: var(--primary-dark);
+    font-weight: bold;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* State 3: Results */
+.result-state {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.result-image-container {
+    width: 100%;
+    height: 200px;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.bounding-box {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    border: 2px solid #ef4444;
+    background-color: rgba(239, 68, 68, 0.2);
+    border-radius: 0.5rem;
+}
+
+.result-card {
+    background-color: var(--surface);
+    padding: 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.disease-tag {
+    color: #ef4444;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.confidence-score {
+    text-align: right;
+}
+
+.confidence-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.action-list {
+    list-style: none;
+    margin-top: 0.5rem;
+}
+
+.action-item {
+    background-color: var(--bg-color);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-main);
+    display: flex;
+    gap: 0.5rem;
+}
+
+.button-group {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.btn-secondary {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    background: transparent;
+    border-radius: 0.75rem;
+    font-weight: bold;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.btn-primary.flex-1 {
+    flex: 1;
+}

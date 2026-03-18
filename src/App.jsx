@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import { Activity, History, Bell, Fish, LayoutDashboard } from 'lucide-react';
 import { AppProvider } from './context/AppContext';
 import Dashboard from './pages/Dashboard';
-import Scanner from './pages/Scanner'; // We import it here now
+import Scanner from './pages/Scanner';
+import Metric from './pages/Metric';
 import './App.css';
 
 const Layout = ({ children }) => {
@@ -11,8 +12,8 @@ const Layout = ({ children }) => {
 
   return (
     <div className="app-container">
-      
-      {/* 🟢 NEW: Persistent Left Sidebar for Scanning */}
+
+
       <aside className="left-sidebar">
         <div className="sidebar-header">
           <div className="logo">
@@ -22,18 +23,17 @@ const Layout = ({ children }) => {
             </span>
           </div>
         </div>
-        
+
         <div className="scanner-wrapper">
-          {/* The Scanner component is now always visible here */}
+
           <Scanner />
         </div>
       </aside>
 
-      {/* 🔵 Right Side: Top Navigation and Dynamic Content */}
+
       <div className="content-area">
         <header className="top-bar">
-          
-          {/* Navigation Links inside the top bar instead of bottom */}
+
           <nav style={{ display: 'flex', gap: '2rem' }}>
             <Link to="/" className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}>
               <LayoutDashboard size={20} /> <span>Dashboard</span>
@@ -67,10 +67,10 @@ export default function App() {
       <Router>
         <Layout>
           <Routes>
-            {/* We removed the /scan route because it's now permanently in the sidebar */}
+
             <Route path="/" element={<Dashboard />} />
-            <Route path="/metrics" element={<div className="p-4 text-center" style={{padding: '2rem'}}>Data Visualizations Coming Soon</div>} />
-            <Route path="/history" element={<div className="p-4 text-center" style={{padding: '2rem'}}>History Log Coming Soon</div>} />
+            <Route path="/metrics" element={<Metric />} />
+            <Route path="/history" element={<div className="p-4 text-center" style={{ padding: '2rem' }}>History Log Coming Soon</div>} />
           </Routes>
         </Layout>
       </Router>

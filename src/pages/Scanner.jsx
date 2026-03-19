@@ -331,7 +331,13 @@ export default function Scanner() {
                                 )}
 
 
-                                <h2 style={{ textTransform: 'capitalize', margin: '0.25rem 0' }}>
+                                <h2 style={{
+                                    textTransform: 'capitalize',
+                                    margin: '0.25rem 0',
+                                    color: scanResult.is_healthy ? '#10b981' : '#ef4444',
+                                    fontWeight: 'bold',
+                                    fontSize: '1.5rem'
+                                }}>
                                     {scanResult.top_class.replace(/_/g, " ")}
                                 </h2>
                             </div>

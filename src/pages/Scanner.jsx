@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { AppContext } from '../context/AppContext'; // Import the context
+import { AppContext } from '../context/AppContext';
 import { Camera, UploadCloud, ChevronRight, ShieldAlert, Droplet, X, Focus, CheckCircle, Fish } from 'lucide-react';
 import '../css/Scanner.css';
 

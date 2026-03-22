@@ -24,15 +24,36 @@ export const AppProvider = ({ children }) => {
         { label: 'Ammonia', value: '0.02 ppm', subtext: 'Safe (< 0.05)', status: 'good' }
     ]);
 
-    const [treatmentLogs, setTreatmentLogs] = useState([]);
-
+    const [treatmentLogs, setTreatmentLogs] = useState(() => {
+        const savedLogs = localStorage.getItem('samakicare_treatment_logs');
+        if (savedLogs) {
+            try {
+                return JSON.parse(savedLogs);
+            } catch (e) {
+                console.error("Failed to parse logs", e);
+            }
+        }
+        return [];
+    });
 
     const addTreatmentLog = (newLog) => {
-        setTreatmentLogs(prevLogs => [newLog, ...prevLogs]);
+        setTreatmentLogs(prevLogs => {
+            const updated = [newLog, ...prevLogs];
+            localStorage.setItem('samakicare_treatment_logs', JSON.stringify(updated));
+            return updated;
+        });
+    };
+
+    const deleteTreatmentLog = (id) => {
+        setTreatmentLogs(prevLogs => {
+            const updated = prevLogs.filter(log => log.id !== id);
+            localStorage.setItem('samakicare_treatment_logs', JSON.stringify(updated));
+            return updated;
+        });
     };
 
     return (
-        <AppContext.Provider value={{ systemStatus, visionMetrics, sensorMetrics, treatmentLogs, pondHistory, addTreatmentLog, setVisionMetrics, setSystemStatus, setPondHistory }}>
+        <AppContext.Provider value={{ systemStatus, visionMetrics, sensorMetrics, treatmentLogs, pondHistory, addTreatmentLog, deleteTreatmentLog, setVisionMetrics, setSystemStatus, setPondHistory }}>
             {children}
         </AppContext.Provider>
     );
